@@ -1,0 +1,12 @@
+{
+  "name": "typechain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:wkdaudwn11/typechain.git",
+  "author": "JangMyungJoo <wkdaudwn1028@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "prestart": "tsc",
+    "start": "node index.js"
+  }
+}

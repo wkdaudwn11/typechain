@@ -1,0 +1,11 @@
+/** TypeScript에게 어떻게 JavaScript로 변환하는지 알려주고, 몇몇 옵션을 설정함 */
+
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2015",
+    "sourceMap": true
+  },
+  "include": ["index.ts"],
+  "exclude": ["node_modules"]
+}
