@@ -51,7 +51,7 @@ const getLatestBlock = (): Block => blockchain[blockchain.length - 1];
 
 const getNewTimestamp = (): number => Math.round(new Date().getTime() / 1000);
 
-const createNewBlock = (data: string): Block => {
+const createNewBlock = (data: string): void => {
   const prevBlock: Block = getLatestBlock();
   const newIndex: number = prevBlock.index + 1;
   const newTimestamp: number = getNewTimestamp();
@@ -69,8 +69,7 @@ const createNewBlock = (data: string): Block => {
     data,
     newTimestamp
   );
-
-  return newBlock;
+  addBlock(newBlock);
 };
 
 const getHashForBlock = (aBlock: Block): string => {
@@ -101,13 +100,10 @@ const addBlock = (candidateBlock: Block): void => {
   }
 };
 
-for (let i = 0; i < 9; i++) {
-  addBlock(createNewBlock(`hello${i}`));
+for (let i = 0; i < 3; i++) {
+  createNewBlock(`hello${i}`);
 }
 
-console.log(blockchain);
-
-// index 버그 존재.
-// console.log(createNewBlock("hello"), createNewBlock("bye"));
+console.log(getBlockchain());
 
 export {};
