@@ -1,33 +1,27 @@
-// interface Human {
-//   name: string;
-//   age: number;
-//   gender: string;
-// }
-
-// const person = {
-//   name: "명주",
-//   age: 29,
-//   gender: "남자"
-// };
-
-class Human {
-  public name: string;
-  public age: number;
-  public gender: string;
-  constructor(name: string, age: number, gender: string) {
-    this.name = name;
-    this.age = age;
-    this.gender = gender;
+class Block {
+  public index: number;
+  public hash: string;
+  public prevHash: string;
+  public data: string;
+  public timestamp: number;
+  constructor(
+    index: number,
+    hash: string,
+    prevHash: string,
+    data: string,
+    timestamp: number
+  ) {
+    this.index = index;
+    this.hash = hash;
+    this.prevHash = prevHash;
+    this.data = data;
+    this.timestamp = timestamp;
   }
 }
+const genesisBlock: Block = new Block(0, "20202020", "", "hello", 123456);
 
-const lynn = new Human("Lynn", 18, "female");
+let blockChain: [Block] = [genesisBlock];
 
-const getInfo = (person: Human): string => {
-  return `이름: ${person.name}, 나이: ${person.age}, 성별: ${person.gender}`;
-};
-
-const val: string = getInfo(lynn);
-console.log(val);
+console.log(blockChain);
 
 export {};
