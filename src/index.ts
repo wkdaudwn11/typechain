@@ -41,7 +41,7 @@ class Block {
   }
 }
 
-const genesisBlock: Block = new Block(0, "20202020", "", "hello", 123456);
+const genesisBlock: Block = new Block(0, "first", "", "hello", 123456);
 
 let blockchain: Block[] = [genesisBlock];
 
@@ -73,11 +73,21 @@ const createNewBlock = (data: string): Block => {
   return newBlock;
 };
 
+const getHashForBlock = (aBlock: Block): string => {
+  return Block.calculateBlockHash(
+    aBlock.index,
+    aBlock.prevHash,
+    aBlock.timestamp,
+    aBlock.data
+  );
+};
+
 const isBlockValid = (candidateBlock: Block, prevBlock: Block): boolean => {
   if (
     !Block.validateStructure(candidateBlock) ||
     prevBlock.index + 1 !== candidateBlock.index ||
     prevBlock.hash !== candidateBlock.prevHash ||
+    getHashForBlock(candidateBlock) !== candidateBlock.hash
   ) {
     return false;
   } else {
@@ -85,7 +95,19 @@ const isBlockValid = (candidateBlock: Block, prevBlock: Block): boolean => {
   }
 };
 
+const addBlock = (candidateBlock: Block): void => {
+  if (isBlockValid(candidateBlock, getLatestBlock())) {
+    blockchain.push(candidateBlock);
+  }
+};
+
+for (let i = 0; i < 9; i++) {
+  addBlock(createNewBlock(`hello${i}`));
+}
+
+console.log(blockchain);
+
 // index 버그 존재.
-console.log(createNewBlock("hello"), createNewBlock("bye"));
+// console.log(createNewBlock("hello"), createNewBlock("bye"));
 
 export {};
